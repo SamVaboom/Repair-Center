@@ -3,11 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kunde Confirmation</title>
+    <title>Gerät Abgabe</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h2>Vielen Dank für das Einchecken Ihres Geräts!</h2>
-    <p>Informationen über die Abgabezeit und Ort werden bald angezeigt.</p>
+    <p>Bringen Sie das Gerät bis am <strong>10.12.2024, 17:00 Uhr</strong> an die folgende Adresse:</p>
+    <p><strong>Aarbergstrasse 46, 2503 Biel</strong></p>
+
+    <div id="map" style="width: 100%; height: 400px; margin-top: 20px;"></div>
+
+    <p>Wir freuen uns auf Ihren Besuch und darauf, Ihnen weiterzuhelfen!</p>
+
+    <script>
+        function initMap() {
+            // Map options
+            const options = {
+                center: { lat: 47.13807, lng: 7.24726 }, // Coordinates for HFTM Biel
+                zoom: 15
+            };
+
+            // New map
+            const map = new google.maps.Map(document.getElementById("map"), options);
+
+            // Add marker
+            const marker = new google.maps.Marker({
+                position: { lat: 47.13807, lng: 7.24726 },
+                map: map
+            });
+        }
+    </script>
+    <!-- Google Maps API script -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
 </body>
 </html>
