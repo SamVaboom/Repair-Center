@@ -5,35 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerät Abgabe</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <h2>Vielen Dank für das Einchecken Ihres Geräts!</h2>
     <p>Bringen Sie das Gerät bis am <strong>10.12.2024, 17:00 Uhr</strong> an die folgende Adresse:</p>
     <p><strong>Aarbergstrasse 46, 2503 Biel</strong></p>
 
-    <div id="map" style="width: 100%; height: 400px; margin-top: 20px;"></div>
+    <div id="map"></div>
 
     <p>Wir freuen uns auf Ihren Besuch und darauf, Ihnen weiterzuhelfen!</p>
 
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
-        function initMap() {
-            // Map options
-            const options = {
-                center: { lat: 47.13807, lng: 7.24726 }, // Coordinates for HFTM Biel
-                zoom: 15
-            };
+        // Initialize the map
+        const map = L.map('map', {
+            minZoom: -1,
+            maxZoom: 1,
+            center: [0, 0],
+            zoom: 0,
+            crs: L.CRS.Simple
+        });
 
-            // New map
-            const map = new google.maps.Map(document.getElementById("map"), options);
+        // Define image bounds and add image overlay
+        const bounds = [[-500, -500], [500, 500]]; // Adjust the bounds if needed
+        const image = L.imageOverlay('map.png', bounds).addTo(map);
 
-            // Add marker
-            const marker = new google.maps.Marker({
-                position: { lat: 47.13807, lng: 7.24726 },
-                map: map
-            });
-        }
+        // Fit the map to the bounds of the image
+        map.fitBounds(bounds);
     </script>
-    <!-- Google Maps API script -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
 </body>
 </html>
