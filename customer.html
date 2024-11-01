@@ -8,14 +8,45 @@
 </head>
 <body>
     <h2>Kunden Check-In Form</h2>
-    <form action="customer-confirmation.html">
+    <form id="customerForm" onsubmit="event.preventDefault(); calculatePrice();">
         <label for="device">Gerät zum Reparieren:</label>
         <input type="text" id="device" name="device" required>
 
-        <label for="price-calc">Preisrechner (geschätzt):</label>
-        <input type="text" id="price-calc" name="price-calc" placeholder="Preisvorschlag erhalten">
+        <label for="purchasePrice">Kaufpreis (CHF):</label>
+        <input type="number" id="purchasePrice" name="purchasePrice" required>
 
-        <button type="submit">Weiter</button>
+        <label for="age">Alter (Jahre):</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="damageType">Art des Schadens:</label>
+        <select id="damageType" name="damageType" onchange="updateFactor()" required>
+            <option value="1.1">Kurzschluss (Verdrahtung)</option>
+            <option value="1.3">Ersatzteilbedarf durch Abnutzung</option>
+            <option value="1.3">Komponentenausfall</option>
+            <option value="1.5">Software- oder Firmwarefehler</option>
+            <option value="1.3">Mechanische Defekte</option>
+            <option value="1.7">Wasserschäden</option>
+        </select>
+
+        <button type="submit">Preisvorschlag Berechnen</button>
     </form>
+
+    <div id="result" style="margin-top: 20px;">
+        <h3>Preisvorschlag (Max): <span id="priceEstimate">CHF 0.00</span></h3>
+    </div>
+
+    <script>
+        function calculatePrice() {
+            const purchasePrice = parseFloat(document.getElementById("purchasePrice").value);
+            const age = parseFloat(document.getElementById("age").value);
+            const factor = parseFloat(document.getElementById("damageType").value);
+
+            // Calculate maximum price
+            const maxPrice = Math.min((purchasePrice * factor) / Math.sqrt(age), purchasePrice);
+
+            // Display the result
+            document.getElementById("priceEstimate").innerText = `CHF ${maxPrice.toFixed(2)}`;
+        }
+    </script>
 </body>
 </html>
