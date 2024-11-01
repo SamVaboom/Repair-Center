@@ -28,11 +28,13 @@
             <option value="1.7">Wasserschäden</option>
         </select>
 
-        <button type="submit">Preisvorschlag Berechnen</button>
+        <button type="button" onclick="calculatePrice()">Preisvorschlag Berechnen</button>
     </form>
 
     <div id="result" style="margin-top: 20px;">
         <h3>Preisvorschlag (Max): <span id="priceEstimate">CHF 0.00</span></h3>
+        <!-- Register button appears after price calculation -->
+        <button id="registerButton" style="display: none;" onclick="registerDevice()">Gerät Registrieren</button>
     </div>
 
     <script>
@@ -46,6 +48,14 @@
 
             // Display the result
             document.getElementById("priceEstimate").innerText = `CHF ${maxPrice.toFixed(2)}`;
+
+            // Show the register button
+            document.getElementById("registerButton").style.display = "block";
+        }
+
+        function registerDevice() {
+            // Redirect to the confirmation page
+            window.location.href = "customer-confirmation.html";
         }
     </script>
 </body>
