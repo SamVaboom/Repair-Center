@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,10 +37,11 @@
 
         // Define image bounds and add image overlay
         const bounds = [[-500, -500], [500, 500]]; // Adjust the bounds if needed
-        const image = L.imageOverlay('map.png', bounds).addTo(map);
+        const image = L.imageOverlay('https://i.ibb.co/S7cMKbr/map.png', bounds).addTo(map);
 
         // Fit the map to the bounds of the image
         map.fitBounds(bounds);
     </script>
 </body>
 </html>
+
